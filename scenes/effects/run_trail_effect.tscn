@@ -1,0 +1,50 @@
+[gd_scene load_steps=6 format=3 uid="uid://run_trail_effect_prefab"]
+
+[ext_resource type="Script" path="res://scripts/effects/timed_effect.gd" id="1_timed"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dust"]
+transparency = 1
+shading_mode = 0
+albedo_color = Color(0.78, 0.72, 0.58, 0.42)
+
+[sub_resource type="SphereMesh" id="SphereMesh_dust"]
+radius = 0.045
+height = 0.09
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_run"]
+direction = Vector3(0, 0.08, -1)
+spread = 44.0
+initial_velocity_min = 0.35
+initial_velocity_max = 1.15
+gravity = Vector3(0, -0.05, 0)
+scale_min = 0.45
+scale_max = 1.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_particle"]
+radius = 0.022
+height = 0.044
+
+[node name="RunTrailEffect" type="Node3D"]
+script = ExtResource("1_timed")
+lifetime = 0.28
+start_scale = Vector3(0.8, 1, 0.8)
+end_scale = Vector3(1.45, 1, 1.45)
+
+[node name="DustA" type="MeshInstance3D" parent="."]
+position = Vector3(-0.12, 0.04, 0)
+material_override = SubResource("StandardMaterial3D_dust")
+mesh = SubResource("SphereMesh_dust")
+
+[node name="DustB" type="MeshInstance3D" parent="."]
+position = Vector3(0.12, 0.035, -0.03)
+material_override = SubResource("StandardMaterial3D_dust")
+mesh = SubResource("SphereMesh_dust")
+
+[node name="Particles" type="GPUParticles3D" parent="."]
+amount = 10
+lifetime = 0.28
+one_shot = true
+explosiveness = 1.0
+emitting = true
+process_material = SubResource("ParticleProcessMaterial_run")
+draw_pass_1 = SubResource("SphereMesh_particle")

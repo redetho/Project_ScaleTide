@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=3 uid="uid://b4lj3ejrvbxuu"]
+
+[ext_resource type="Script" uid="uid://16xfnt0lp7qk" path="res://scripts/player/player_controller.gd" id="1_player"]
+[ext_resource type="PackedScene" path="res://scenes/effects/player_shadow.tscn" id="2_shadow"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_body"]
+radius = 0.22
+height = 0.9
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_player"]
+shading_mode = 0
+albedo_color = Color(0.97, 0.78, 0.43, 1)
+billboard_mode = 1
+
+[sub_resource type="QuadMesh" id="QuadMesh_player"]
+size = Vector2(0.52, 0.82)
+
+[node name="Player" type="CharacterBody3D" unique_id=1429866477]
+script = ExtResource("1_player")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1480057401]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45, 0)
+shape = SubResource("CapsuleShape3D_body")
+
+[node name="Shadow" parent="." instance=ExtResource("2_shadow")]
+
+[node name="VisualPivot" type="Node3D" parent="." unique_id=1276920108]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.68, 0)
+
+[node name="Body" type="MeshInstance3D" parent="VisualPivot" unique_id=1306521553]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.19602287, 0)
+material_override = SubResource("StandardMaterial3D_player")
+mesh = SubResource("QuadMesh_player")

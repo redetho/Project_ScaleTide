@@ -1,0 +1,270 @@
+[gd_scene format=3 uid="uid://ce43xn20lye7w"]
+
+[ext_resource type="Script" uid="uid://djtnqw8gvr8wj" path="res://scripts/main.gd" id="1_main"]
+[ext_resource type="PackedScene" uid="uid://b4lj3ejrvbxuu" path="res://scenes/player/player.tscn" id="2_player"]
+[ext_resource type="Script" uid="uid://cl27wfuwpeboy" path="res://scripts/components/interactable.gd" id="3_interactable"]
+
+[sub_resource type="Environment" id="Environment_main"]
+background_mode = 1
+background_color = Color(0.623529, 0.776471, 0.815686, 1)
+ambient_light_source = 2
+ambient_light_color = Color(0.831373, 0.901961, 0.87451, 1)
+ambient_light_energy = 1.15
+reflected_light_source = 1
+
+[sub_resource type="BoxShape3D" id="Shape_ground"]
+size = Vector3(34, 0.4, 24)
+
+[sub_resource type="StandardMaterial3D" id="Mat_ground"]
+albedo_color = Color(0.486275, 0.623529, 0.372549, 1)
+roughness = 0.9
+
+[sub_resource type="BoxMesh" id="Mesh_ground"]
+size = Vector3(34, 0.4, 24)
+
+[sub_resource type="BoxShape3D" id="Shape_ridge"]
+size = Vector3(12, 0.55, 3.2)
+
+[sub_resource type="StandardMaterial3D" id="Mat_ridge"]
+albedo_color = Color(0.721569, 0.521569, 0.364706, 1)
+roughness = 0.9
+
+[sub_resource type="BoxMesh" id="Mesh_ridge"]
+size = Vector3(12, 0.55, 3.2)
+
+[sub_resource type="BoxShape3D" id="Shape_plateau"]
+size = Vector3(4.7, 0.55, 3.3)
+
+[sub_resource type="StandardMaterial3D" id="Mat_plateau"]
+albedo_color = Color(0.831373, 0.678431, 0.45098, 1)
+roughness = 0.9
+
+[sub_resource type="BoxMesh" id="Mesh_plateau"]
+size = Vector3(4.7, 0.55, 3.3)
+
+[sub_resource type="BoxShape3D" id="Shape_high_scale"]
+size = Vector3(3.2, 0.5, 2.6)
+
+[sub_resource type="StandardMaterial3D" id="Mat_high_scale"]
+albedo_color = Color(0.623529, 0.478431, 0.376471, 1)
+roughness = 0.9
+
+[sub_resource type="BoxMesh" id="Mesh_high_scale"]
+size = Vector3(3.2, 0.5, 2.6)
+
+[sub_resource type="BoxShape3D" id="Shape_calm"]
+size = Vector3(3.2, 0.35, 2.2)
+
+[sub_resource type="StandardMaterial3D" id="Mat_calm"]
+albedo_color = Color(0.415686, 0.65098, 0.639216, 1)
+roughness = 0.9
+
+[sub_resource type="BoxMesh" id="Mesh_calm"]
+size = Vector3(3.2, 0.35, 2.2)
+
+[sub_resource type="BoxShape3D" id="Shape_fissure"]
+size = Vector3(2.4, 0.45, 1.7)
+
+[sub_resource type="StandardMaterial3D" id="Mat_fissure"]
+albedo_color = Color(0.482353, 0.247059, 0.345098, 1)
+roughness = 0.9
+
+[sub_resource type="BoxMesh" id="Mesh_fissure"]
+size = Vector3(2.4, 0.45, 1.7)
+
+[sub_resource type="BoxShape3D" id="Shape_current"]
+size = Vector3(7.2, 0.25, 1)
+
+[sub_resource type="StandardMaterial3D" id="Mat_current"]
+albedo_color = Color(0.494118, 0.560784, 0.85098, 1)
+roughness = 0.9
+
+[sub_resource type="BoxMesh" id="Mesh_current"]
+size = Vector3(7.2, 0.25, 1)
+
+[sub_resource type="BoxShape3D" id="Shape_ramp"]
+size = Vector3(3.8, 0.35, 1.35)
+
+[sub_resource type="StandardMaterial3D" id="Mat_ramp"]
+albedo_color = Color(0.662745, 0.552941, 0.4, 1)
+roughness = 0.9
+
+[sub_resource type="BoxMesh" id="Mesh_ramp"]
+size = Vector3(3.8, 0.35, 1.35)
+
+[sub_resource type="SphereShape3D" id="Shape_marker"]
+radius = 0.9
+
+[sub_resource type="StandardMaterial3D" id="Mat_marker"]
+albedo_color = Color(1, 0.9, 0.46, 0.85)
+roughness = 0.9
+
+[sub_resource type="SphereMesh" id="Mesh_marker"]
+radius = 0.12
+height = 0.24
+
+[node name="Main" type="Node3D" unique_id=444092475]
+script = ExtResource("1_main")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1826746007]
+environment = SubResource("Environment_main")
+
+[node name="Sun" type="DirectionalLight3D" parent="." unique_id=1036155774]
+transform = Transform3D(0.882948, 0.337878, 0.325385, 0, 0.693653, -0.72031, -0.469472, 0.635993, 0.612399, 0, 0, 0)
+light_energy = 1.05
+shadow_enabled = true
+
+[node name="SoftFill" type="DirectionalLight3D" parent="." unique_id=1125878620]
+transform = Transform3D(-0.642788, -0.719846, -0.262003, 0, 0.34202, -0.939693, 0.766044, -0.604023, -0.219846, 0, 0, 0)
+light_energy = 0.28
+
+[node name="World" type="Node3D" parent="." unique_id=1119475986]
+
+[node name="WarmGround" type="StaticBody3D" parent="World" unique_id=1583668335]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/WarmGround" unique_id=858729820]
+shape = SubResource("Shape_ground")
+
+[node name="Visual" type="MeshInstance3D" parent="World/WarmGround" unique_id=894893276]
+material_override = SubResource("Mat_ground")
+mesh = SubResource("Mesh_ground")
+
+[node name="DragonRidge" type="StaticBody3D" parent="World" unique_id=1452457206]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/DragonRidge" unique_id=1297046111]
+shape = SubResource("Shape_ridge")
+
+[node name="Visual" type="MeshInstance3D" parent="World/DragonRidge" unique_id=1353307038]
+material_override = SubResource("Mat_ridge")
+mesh = SubResource("Mesh_ridge")
+
+[node name="VillagePlateau" type="StaticBody3D" parent="World" unique_id=308959086]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, -0.4)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/VillagePlateau" unique_id=1939977180]
+shape = SubResource("Shape_plateau")
+
+[node name="Visual" type="MeshInstance3D" parent="World/VillagePlateau" unique_id=1460170983]
+material_override = SubResource("Mat_plateau")
+mesh = SubResource("Mesh_plateau")
+
+[node name="HighScale" type="StaticBody3D" parent="World" unique_id=277997485]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.4, 1.45, -3.7)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/HighScale" unique_id=778374086]
+shape = SubResource("Shape_high_scale")
+
+[node name="Visual" type="MeshInstance3D" parent="World/HighScale" unique_id=160265835]
+material_override = SubResource("Mat_high_scale")
+mesh = SubResource("Mesh_high_scale")
+
+[node name="CalmZone" type="StaticBody3D" parent="World" unique_id=1275271650]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.6, 0.75, -2.2)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/CalmZone" unique_id=1505392337]
+shape = SubResource("Shape_calm")
+
+[node name="Visual" type="MeshInstance3D" parent="World/CalmZone" unique_id=1701715794]
+material_override = SubResource("Mat_calm")
+mesh = SubResource("Mesh_calm")
+
+[node name="DragonFissure" type="StaticBody3D" parent="World" unique_id=1956189735]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.5, 0.85, 3.6)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/DragonFissure" unique_id=1051966402]
+shape = SubResource("Shape_fissure")
+
+[node name="Visual" type="MeshInstance3D" parent="World/DragonFissure" unique_id=1566902674]
+material_override = SubResource("Mat_fissure")
+mesh = SubResource("Mesh_fissure")
+
+[node name="NightCurrent" type="StaticBody3D" parent="World" unique_id=1859196093]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.2, 1.15, -6.1)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/NightCurrent" unique_id=1143312680]
+shape = SubResource("Shape_current")
+
+[node name="Visual" type="MeshInstance3D" parent="World/NightCurrent" unique_id=1914020671]
+material_override = SubResource("Mat_current")
+mesh = SubResource("Mesh_current")
+
+[node name="ScaleRamp" type="StaticBody3D" parent="World" unique_id=1265398745]
+transform = Transform3D(1, 0, 0, 0, 0.951057, -0.309017, 0, 0.309017, 0.951057, -2.7, 0.95, -2.65)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/ScaleRamp" unique_id=953937012]
+shape = SubResource("Shape_ramp")
+
+[node name="Visual" type="MeshInstance3D" parent="World/ScaleRamp" unique_id=539173683]
+material_override = SubResource("Mat_ramp")
+mesh = SubResource("Mesh_ramp")
+
+[node name="Campfire" type="Area3D" parent="World" unique_id=1679307294]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.05, 0)
+script = ExtResource("3_interactable")
+interaction_name = "Campfire"
+description = "Acampamento inicial
+Volte aqui para entregar descobertas."
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/Campfire" unique_id=86299228]
+shape = SubResource("Shape_marker")
+
+[node name="Visual" type="MeshInstance3D" parent="World/Campfire" unique_id=1678805982]
+material_override = SubResource("Mat_marker")
+mesh = SubResource("Mesh_marker")
+
+[node name="CalmZoneMarker" type="Area3D" parent="World" unique_id=1521937845]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.6, 1.2, -2.2)
+script = ExtResource("3_interactable")
+interaction_name = "Calm Zone"
+description = "Zona Calma preparada de dia, segura para pescar durante a Maré."
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/CalmZoneMarker" unique_id=746487261]
+shape = SubResource("Shape_marker")
+
+[node name="Visual" type="MeshInstance3D" parent="World/CalmZoneMarker" unique_id=2035718266]
+material_override = SubResource("Mat_marker")
+mesh = SubResource("Mesh_marker")
+
+[node name="DragonFissureMarker" type="Area3D" parent="World" unique_id=917020127]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.5, 1.25, 3.6)
+script = ExtResource("3_interactable")
+interaction_name = "Dragon Fissure"
+description = "Fissura do Dragão. À noite, um desafio temporário pode surgir aqui."
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/DragonFissureMarker" unique_id=914221715]
+shape = SubResource("Shape_marker")
+
+[node name="Visual" type="MeshInstance3D" parent="World/DragonFissureMarker" unique_id=1274001256]
+material_override = SubResource("Mat_marker")
+mesh = SubResource("Mesh_marker")
+
+[node name="NightCurrentMarker" type="Area3D" parent="World" unique_id=571668301]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.2, 1.55, -6.1)
+script = ExtResource("3_interactable")
+interaction_name = "Night Current"
+description = "Corrente de Luz. O Tecelão das Mares captura fios de maré neste fluxo."
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/NightCurrentMarker" unique_id=1245182774]
+shape = SubResource("Shape_marker")
+
+[node name="Visual" type="MeshInstance3D" parent="World/NightCurrentMarker" unique_id=185721670]
+material_override = SubResource("Mat_marker")
+mesh = SubResource("Mesh_marker")
+
+[node name="PlayerRoot" type="Node3D" parent="." unique_id=593015886]
+
+[node name="Player1" parent="PlayerRoot" unique_id=1187069078 instance=ExtResource("2_player")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.05, 1.1)
+
+[node name="CameraRig" type="Node3D" parent="." unique_id=1984852306]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.05, 1.1)
+
+[node name="PlayerCamera" type="Camera3D" parent="CameraRig" unique_id=23127877]
+transform = Transform3D(1, 0, 0, 0, 0.7384953, 0.67425865, 0, -0.67425865, 0.7384953, 0, 4.9276695, 5.05496)
+current = true
+fov = 52.474903
+size = 6.2
+far = 80.0
+
+[node name="HUD" type="CanvasLayer" parent="." unique_id=152589145]
