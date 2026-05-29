@@ -1,11 +1,11 @@
-# Canções do Dragão Adormecido
+# Project ScaleTide
 
-Bare bones de um RPG cozy top-down cooperativo em Godot 4.
+Bare bones de um RPG cozy top-down/2.5D cooperativo em Godot 4.
 
-## Estado atual
+## Estado Atual
 
 - Cena principal 3D em `res://scenes/main.tscn`
-- Protótipo focado no Player1, com gameplay em plano X/Z e pulo real no eixo Y
+- Prototipo focado no Player1, com gameplay em plano X/Z e pulo real no eixo Y
   - `WASD` para mover
   - `E` para interagir
   - `Q` para tocar melodia
@@ -14,17 +14,12 @@ Bare bones de um RPG cozy top-down cooperativo em Godot 4.
   - Clique esquerdo para atacar
   - Ataque durante/logo depois de dash vira um golpe em linha mais longo, com recuperacao maior
   - Segurar `Shift` depois do dash faz o Player1 correr e soltar particulas pelos pes
-- Câmera ortográfica 3D seguindo apenas o Player1
-- Cenário 3D simples com chão, plataformas, rampa, Fissura, Zona Calma e Corrente de Luz
+- Camera ortografica 3D seguindo apenas o Player1
+- Cenario 3D simples com chao, plataformas, rampa, Fissura, Zona Calma e Corrente de Luz
 - Ciclo dia/noite em `TimeManager`
-- Marés noturnas em `TideManager`
-- HUD simples com fase, estágio da vila e maré atual
-- Pontos de interação no mundo:
-  - Acampamento
-  - Zona Calma
-  - Fissura do Dragão
-  - Corrente de Luz
-- Esqueleto de sistemas para vila, NPCs, inventário, construção, exploração, combate, ecos, loja e melodias
+- Mares noturnas em `TideManager`
+- HUD simples com fase, estagio da vila e mare atual
+- GDD inicial em `GDD.md`
 
 ## Arquitetura
 
@@ -34,18 +29,18 @@ Os singletons ficam em `res://scripts/core/`:
 
 - `GameState`: fase atual do jogo
 - `TimeManager`: dia, noite e progresso do ciclo
-- `TideManager`: marés mágicas noturnas
-- `VillageManager`: estágio da vila, prédios e NPCs recrutados
+- `TideManager`: mares magicas noturnas
+- `VillageManager`: estagio da vila, predios e NPCs recrutados
 - `NPCRegistry`: descoberta e recrutamento
 - `QuestManager`: quests simples
 - `InventoryManager`: itens por quantidade
 - `SaveManager`: coleta/salva dados principais
-- `AudioDirector`: ponto central para música e melodias
+- `AudioDirector`: ponto central para musica e melodias
 - `CoopManager`: jogadores ativos
 
 ### Resources
 
-Definições editáveis ficam em `res://scripts/resources/`:
+Definicoes editaveis ficam em `res://scripts/resources/`:
 
 - `ItemData`
 - `NPCData`
@@ -55,8 +50,6 @@ Definições editáveis ficam em `res://scripts/resources/`:
 - `TideData`
 - `BiomeData`
 - `CareerData`
-
-Use esses Resources depois para criar dados em `res://data/`, sem prender conteúdo em scripts.
 
 ### Systems
 
@@ -70,14 +63,22 @@ Sistemas de gameplay ficam em `res://scripts/systems/`:
 - `CombatDirector`
 - `ShopSystem`
 
-Eles ainda são esqueletos, mas já têm sinais e métodos básicos para crescer.
+### Effects
 
-## Próximos passos sugeridos
+Prefabs editaveis ficam em `res://scenes/effects/`:
 
-1. Trocar os blocos 3D de protótipo por uma cena de terreno pixelada/low-poly.
-2. Transformar os pontos de interação em cenas próprias.
-3. Adicionar `data/*.tres` para itens, NPCs, prédios, melodias e marés.
+- `player_shadow.tscn`
+- `dash_effect.tscn`
+- `run_trail_effect.tscn`
+- `attack_effect.tscn`
+- `dash_attack_effect.tscn`
+
+## Proximos Passos Sugeridos
+
+1. Trocar os blocos 3D de prototipo por uma cena de terreno pixelada/low-poly.
+2. Transformar os pontos de interacao em cenas proprias.
+3. Adicionar `data/*.tres` para itens, NPCs, predios, melodias e mares.
 4. Implementar hitbox e alvo real para o ataque do Player1.
-5. Refinar plataformas, rampas, bordas escaláveis e checagem de altura.
-6. Implementar uma interação real no acampamento: entregar recursos, recrutar NPCs e construir.
-7. Criar a primeira Fissura do Dragão como evento noturno jogável.
+5. Refinar plataformas, rampas, bordas escalaveis e checagem de altura.
+6. Implementar uma interacao real no acampamento: entregar recursos, recrutar NPCs e construir.
+7. Criar a primeira Fissura do Dragao como evento noturno jogavel.
