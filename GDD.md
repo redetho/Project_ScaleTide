@@ -105,6 +105,8 @@ As acoes do dia afetam a noite, e as descobertas da noite abrem possibilidades n
 
 A Mare Magica e um fenomeno noturno de luz e nevoa. Ela transforma o mundo sem alaga-lo.
 
+No prototipo, a subida da mare e representada por `TideManager.tide_level`, que vai de `0.0` ate `TideManager.max_tide_level` durante a noite e volta a `0.0` durante o dia. Esse parametro deve ser usado futuramente para controlar shader, nevoa, altura visual, audio, spawn de criaturas e recursos.
+
 Tipos previstos:
 
 - **Mare Azul**

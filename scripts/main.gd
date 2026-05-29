@@ -73,14 +73,18 @@ func _build_hud() -> void:
 func _update_hud() -> void:
 	var time_name := "Dia" if TimeManager.is_daytime() else "Noite"
 	var tide_name := TideManager.current_tide.display_name
-	hud_label.text = "%s %.0f%% | Maré: %s | Vila: %s | Fase: %s" % [
+	hud_label.text = "%s %.0f%% | Mare: %s %.0f%% | Vila: %s | Fase: %s" % [
 		time_name,
 		TimeManager.day_progress * 100.0,
 		tide_name,
+		_normalized_tide_level() * 100.0,
 		VillageManager.stage_name(),
 		GameState.phase_name()
 	]
-	tide_overlay.color = TideManager.current_tide.overlay_color
+
+	var overlay_color := TideManager.current_tide.overlay_color
+	overlay_color.a *= _normalized_tide_level()
+	tide_overlay.color = overlay_color
 
 
 func _update_camera(delta: float) -> void:
@@ -112,6 +116,13 @@ func _update_lighting() -> void:
 	sun_light.light_energy = lerpf(0.04, 1.05, daylight)
 	fill_light.light_energy = lerpf(0.12, 0.28, daylight)
 	sun_light.rotation_degrees = Vector3(lerpf(-34.0, -64.0, daylight), -28.0 + hour * 3.0, 0.0)
+
+
+func _normalized_tide_level() -> float:
+	if TideManager.max_tide_level <= 0.0:
+		return 0.0
+
+	return clampf(TideManager.tide_level / TideManager.max_tide_level, 0.0, 1.0)
 
 
 func _on_day_started(_day: int) -> void:
