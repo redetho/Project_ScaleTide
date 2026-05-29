@@ -73,7 +73,7 @@ Prefabs editaveis ficam em `res://scenes/effects/`:
 - `attack_effect.tscn`
 - `dash_attack_effect.tscn`
 
-## Proximos Passos Sugeridos
+## TODO
 
 1. Trocar os blocos 3D de prototipo por uma cena de terreno pixelada/low-poly.
 2. Transformar os pontos de interacao em cenas proprias.
